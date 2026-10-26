@@ -1,0 +1,7 @@
+# Logs gerados pelo script
+*.log
+logs/
+
+# Editores
+.vscode/
+.idea/
