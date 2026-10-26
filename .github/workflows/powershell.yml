@@ -14,14 +14,12 @@ jobs:
 
       - name: Instalar PSScriptAnalyzer
         shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          Install-PackageProvider -Name NuGet -Force | Out-Null
-          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser -SkipPublisherCheck
+        run: Install-PSResource -Name PSScriptAnalyzer -Scope CurrentUser -TrustRepository
 
       - name: Analisar
         shell: pwsh
         run: |
+          Import-Module PSScriptAnalyzer
           $results = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error
           if ($results) {
             $results | Format-Table -AutoSize
